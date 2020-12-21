@@ -1,0 +1,709 @@
+//initial settings
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    cursor: none;
+}
+
+//font variable
+$font: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+
+//horizontal scrolling setup
+.outer-wrapper {
+    width: 100vh;
+    height: 100vw;
+    transform: rotate(-90deg) translateX(-100vh );
+    transform-origin: top left;
+    //overflow-y: scroll;
+    //overflow-x: scroll;
+    overflow: none;
+    position: absolute;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    .wrapper {
+        display: flex;
+        flex-direction: row;
+        width: calc(100vw + 1480px + 450px + 1850px + 3094.53px + 300px);
+        transform: rotate(90deg) translateY(-100vh);
+        transform-origin: top left;
+        @media screen and (min-width: 768px) {
+            width: calc(100vw + 1530px + 550px + 2000px + 4270px + 300px);
+        }
+        @media screen and (min-width: 1024px) {
+            width: calc(100vw + 1630px + 550px + 2200px + 4570px + 325px);
+        }
+        @media screen and (min-width: 1200px) {
+            width: calc(100vw + 1630px + 1300px + 2200px + 5370px + 340px);
+        }
+        @media screen and (min-width: 1400px) {
+            width: calc(100vw + 1630px + 1300px + 2200px + 5570px + 340px);
+        }
+        @media screen and (min-width: 1680px) {
+            width: calc(100vw + 2114px + 1580px + 2250px + 6245px + 240px);
+        }
+    }
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+
+//mixins
+@mixin siteRedirect {
+    text-decoration: none;
+    color: #000;
+    font-family: $font;
+    font-weight: 200;
+    font-size: 1em;
+    @media screen and (min-width: 1024px) {
+        font-size: 1.1em;
+    }
+    @media screen and (min-width: 1680px) {
+        font-size: 1.25em;
+    }
+    span {
+        padding-right: 5px;
+        .brand {
+            text-decoration: underline;
+        }
+    }
+}
+
+@mixin title {
+    font-family: $font;
+    font-weight: bold;
+    font-size: 3em;
+    text-transform: uppercase;
+    margin-bottom: 0.9em;
+    @media screen and (min-width: 1024px) {
+        font-size: 3.5em;
+    }
+    @media screen and (min-width: 1680px) {
+        font-size: 4em;
+    }
+}
+
+@mixin shop-image-template {
+    position: relative;
+    &::before {
+        content: "";
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        background-size: cover;
+    }
+    &:hover::before {
+        opacity: 0.6;
+    }
+}
+
+@mixin text {
+    width: 300px;
+    font-family: $font;
+    font-weight: 200;
+    font-size: 1em;
+    line-height: 28px;
+    margin-bottom: 0.75em;
+    @media screen and (min-width: 1024px) {
+        width: 400px;
+        font-size: 1.1em;
+    }
+    @media screen and (min-width: 1680px) {
+        width: 425px;
+        font-size: 1.25em;
+    }
+}
+
+//cursor
+.cursor {
+    opacity: 0;
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    transform: translate(-50%, -50%);
+    background-color: #000;
+    z-index: 999;
+    pointer-events: none;
+    border-radius: 100px;
+    @media (min-width: 1200px) {
+        opacity: 1;
+    }
+    &.active {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.loading-bg {
+    height: 100vh;
+    width: 100vw;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    opacity: 1;
+    transition: opacity 1.8s ease-in-out;
+    .logo {
+        height: 100px;
+        width: 100px;
+        @media screen and (min-width: 1024px) {
+            height: 125px;
+            width: 125px;
+        }
+        @media screen and (min-width: 1200px) {
+            height: 140px;
+            width: 140px;
+        }
+    }
+}
+
+//section 1 - front
+.sec-1 {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    header {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 50px 0;
+        @media screen and (min-width: 1200px) {
+            margin: 70px 0;
+        }
+        .logo {
+            height: 100px;
+            width: 100px;
+            @media screen and (min-width: 1024px) {
+                height: 125px;
+                width: 125px;
+            }
+            @media screen and (min-width: 1200px) {
+                height: 140px;
+                width: 140px;
+            }
+        }
+        .header-title {
+            margin-top: 15px;
+            font-family: $font;
+            font-size: 1em;
+            font-weight: bold;
+            text-transform: uppercase;
+            @media screen and (min-width: 1024px) {
+                font-size: 1.25em;
+            }
+            @media screen and (min-width: 1680px) {
+                font-size: 1.45em;
+            }
+        }
+    }
+    .front-images-block {
+        height: 100%;
+        width: 100%;
+        padding: 0 20px;
+        @media screen and (min-width: 768px) {
+            padding: 0 30px;
+        }
+        @media screen and (min-width: 1200px) {
+            padding: 0 40px;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+        }
+        .front-image{
+            height: 100%;
+            width: 100%;
+            @media screen and (min-width: 1200px) {
+                height: 70%;
+            }
+            &.img-1 {
+                background-image: url('bg/bg1.jpg');
+                background-size: cover;
+            }
+            &.img-2 {
+                background-image: url('bg/bg2.jpg');
+                background-size: cover;
+                height: 90%;
+                margin: 0 40px;
+            }
+            &.img-3 {
+                background-image: url('bg/bg3.jpg');
+                background-size: cover;
+            }
+        }
+    }
+}
+
+//section 2 - history
+.sec-2 {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 100px;
+    .history-block {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .history-title {
+            @include title;
+        }
+        .history-text {
+            width: 300px;
+            font-family: $font;
+            font-weight: 200;
+            font-size: 1em;
+            line-height: 28px;
+            margin-bottom: 0.75em;
+            @media screen and (min-width: 1024px) {
+                width: 400px;
+                font-size: 1.1em;
+            }
+            @media screen and (min-width: 1680px) {
+                width: 425px;
+                font-size: 1.25em;
+            }
+        }
+        a {
+            @include siteRedirect;
+        }
+    }
+    .history-img {
+        width: 100%;
+        height: 623px;
+        @media screen and (min-width: 768px) {
+            padding-left: 50px;
+        }
+        @media screen and (min-width: 1680px) {
+            width: 1539px;
+            height: 887.5px;
+        }
+    }
+}
+
+//section 3 - shop online
+.sec-3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 100px;
+    .shop-images-block {
+        display: flex;
+        flex-direction: column;
+        @media screen and (min-width: 1200px) {
+            flex-direction: row;
+        }
+        .shop-image {
+            height: 35vh;
+            width: 350px;
+            margin: 1em 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            @media screen and (min-width: 768px) {
+                width: 450px;
+            }
+            @media screen and (min-width: 1200px) {
+                height: 65vh;
+                width: 600px;
+            }
+            @media screen and (min-width: 1680px) {
+                margin: 1.25em 0;
+                width: 700px;
+            }
+            &.shop-image-1 {
+                position: relative;
+                &::before {
+                    content: "";
+                    height: 100%;
+                    width: 100%;
+                    position: absolute;
+                    background-image: url('shop/s1.jpg');
+                    background-size: cover;
+                }
+                &:hover::before {
+                    opacity: 0.25;
+                }
+            }
+            &.shop-image-2 {
+                position: relative;
+                &::before {
+                    content: "";
+                    height: 100%;
+                    width: 100%;
+                    position: absolute;
+                    background-image: url('shop/s2.jpg');
+                    background-size: cover;
+                }
+                &:hover::before {
+                    opacity: 0.25;
+                }
+            }
+            &:hover a {
+                opacity: 1;
+            }
+            a {
+                opacity: 0;
+                position: relative;
+                z-index: 10;
+            }
+        }
+    }
+    a {
+        @include siteRedirect;
+        position: relative;
+        z-index: 999;
+        margin-top: 0.75em;
+    }
+}
+
+//section 4 selected shops
+.sec-4 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 100px;
+    .shops-block {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        .shops-title-block {
+            .shops-title {
+                @include title;
+                padding-right: 100px;
+                margin: 0;
+                width: 600px;
+                @media screen and (min-width: 1024px) {
+                    width: 650px;
+                }
+                @media screen and (min-width: 1680px) {
+                    width: 700px;
+                }
+            }
+            a {
+                @include siteRedirect;
+            }
+        }
+        .shops-images-block {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .images-row {
+                display: flex; 
+                margin: 1em 0;
+                .shops-image {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-end;
+                    align-items: flex-start;
+                    height: 35vh;
+                    width: 350px;
+                    margin: 0 20px;
+                    font-family: $font;
+                    font-weight: 200;
+                    font-size: 1em;
+                    margin-bottom: 0.75em;
+                    color: #fff;
+                    padding: 15px;
+                    background-color: #000;
+                    &:first-of-type {
+                        margin-left: 0;
+                    }
+                    @media screen and (min-width: 768px) {
+                        width: 400px;
+                    }
+                    @media screen and (min-width: 1024px) {
+                        font-size: 1.1em;
+                        height: 40vh;
+                        width: 450px;
+                    }
+                    @media screen and (min-width: 1680px) {
+                        font-size: 1.25em;
+                    }
+                    &.shops-image-1 {
+                        @include shop-image-template;
+                        &::before {
+                            background-image: url('shops/g1.jpg');
+                        }
+                    }
+                    &.shops-image-2 {
+                        @include shop-image-template;
+                        &::before {
+                            background-image: url('shops/g2.jpg');
+                        }
+                    }
+                    &.shops-image-3 {
+                        @include shop-image-template;
+                        &::before {
+                            background-image: url('shops/g3.jpg');
+                        }
+                    }
+                    &.shops-image-4 {
+                        @include shop-image-template;
+                        &::before {
+                            background-image: url('shops/g4.jpg');
+                        }
+                    }
+                    &.shops-image-5 {
+                        @include shop-image-template;
+                        &::before {
+                            background-image: url('shops/g5.jpg');
+                        }
+                    }
+                    &.shops-image-6 {
+                        @include shop-image-template;
+                        &::before {
+                            background-image: url('shops/g6.jpg');
+                        }
+                    }
+
+                    &:hover span {
+                        opacity: 1;
+                    }
+
+                    span {
+                        position: relative;
+                        opacity: 0;
+                        z-index: 10;
+                    }
+                    .shop-location {
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//section 5 collaborations
+.sec-5 {
+    padding-left: 100px;
+    display: flex;
+    @media screen and (min-width: 768px) {
+        padding-left: 200px;
+    }
+    .collaborations-block {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @media screen and (min-width: 768px) {
+            flex-direction: column;
+            justify-content: initial;
+            align-items: initial;
+        }
+        .collaborations-title {
+            @include title;
+            margin: 20px 0;
+            max-width: 700px;
+            padding-right: 100px;
+            @media screen and (min-width: 768px) {
+                margin: 70px 0; 
+            }
+        }
+        .collaborations-card-block {
+            display: flex;
+            flex-direction: row;
+            .collaborations-card {
+                display: flex;
+                flex-direction: column;
+                padding-right: 50px;
+                @media screen and (min-width: 768px) {
+                    flex-direction: row;
+                }
+                .collaborations-card-image {
+                    height: 30vh;
+                    width: auto;
+                    @media screen and (min-width: 768px) {
+                        height: 60vh;
+                        width: 400px;
+                    }
+                    @media screen and (min-width: 1200px) {
+                        height: 65vh;
+                        width: 500px;
+                    }
+                    @media screen and (min-width: 1680px) {
+                        height: 65vh;
+                        width: 650px;
+                    }
+                    &.card-image-1 {
+                        background-image: url('collabs/c1.jpg');
+                        background-size: cover;
+                    }
+                    &.card-image-2 {
+                        background-image: url('collabs/c3.jpg');
+                        background-size: cover;
+                        @media screen and (min-width: 1200px) {
+                            background-position: center;
+                        }
+                    }
+                    &.card-image-3 {
+                        background-image: url('collabs/c5.jpg');
+                        background-size: cover;
+                    }
+                    canvas {
+                        display: f
+                    }
+                }
+                .collaborations-card-block-text {
+                    @media screen and (min-width: 768px) {
+                        padding: 0 70px;
+                    }
+                    .collaborations-card-title {
+                        font-family: $font;
+                        font-weight: 200;
+                        font-size: 2.4em;
+                        margin: 15px 0;
+                        @media screen and (min-width: 768px) {
+                            margin: 0;
+                            margin-bottom: 15px;
+                        }
+                        @media screen and (min-width: 1680px) {
+                            margin-bottom: 30px;
+                        }
+                    }
+                    .collaborations-card-authors {
+                        display: flex;
+                        flex-direction: column;
+                        span {
+                            font-family: $font;
+                            font-weight: 200;
+                            font-size: 1em;
+                            line-height: 28px;
+                            text-transform: lowercase;
+                            @media screen and (min-width: 1024px) {
+                                font-size: 1.1em;
+                            }
+                            @media screen and (min-width: 1680px) {
+                                font-size: 1.25em;
+                            }
+                        }
+                    }
+                    .collaborations-card-text {
+                        @include text;
+                        margin-top: 30px;
+                        @media screen and (min-width: 768px) {
+                            margin-top: 50px;
+                        }
+                        @media screen and (min-width: 1680px) {
+                            margin-top: 70px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .image-layout {
+        height: 100%;
+        width: 800px;
+        background-color: black;
+        position: relative;
+        @media screen and (min-width: 1200px) {
+            width: 1200px;
+        }
+        @media screen and (min-width: 1440px) {
+            width: 1400px;
+        }
+        &::before {
+            content: "";
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            background-image: url('collabs/c6.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.7;
+        }
+        .image-text {
+            @include text;
+            position: absolute;
+            color: #fff;
+            top: 3%;
+            right: 3%;
+        }
+    }
+
+    .collaborations-link {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 100px;
+        a {
+            @include siteRedirect;
+            margin-bottom: 0.75em;
+        }
+        .collaborations-link-image {
+            height: 60vh;
+            width: 400px;
+            background-image: url('collabs/c7.jpg');
+            background-size: cover;
+            background-position: center;
+            @media screen and (min-width: 1200px) {
+                height: 65vh;
+                width: 500px;
+            }
+            @media screen and (min-width: 1680px) {
+                height: 65vh;
+                width: 650px;
+            }
+        }
+    }
+}
+
+//section 6 footer 
+.sec-6 {
+    padding: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    .logo {
+        height: 100px;
+        width: 100px;
+        margin-bottom: 50px;
+        @media screen and (min-width: 1024px) {
+            height: 125px;
+            width: 125px;
+        }
+        @media screen and (min-width: 1200px) {
+            height: 140px;
+            width: 140px;
+        }
+    }
+    ul {
+        list-style: none;
+        text-align: right;
+        li {
+            font-family: $font;
+            font-weight: 200;
+            font-size: 1em;
+            line-height: 28px;
+            text-transform: lowercase;
+            text-transform: uppercase;
+            @media screen and (min-width: 1024px) {
+                font-size: 1.1em;
+            }
+            @media screen and (min-width: 1680px) {
+                font-size: 1.25em;
+            }
+            a {
+                text-decoration: none;
+                color: #000;
+            }
+        }
+    }
+}
