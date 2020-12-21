@@ -169,6 +169,7 @@ $font: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
 //section 1 - front
 .sec-1 {
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -248,6 +249,7 @@ $font: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
 //section 2 - history
 .sec-2 {
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -295,6 +297,8 @@ $font: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
 
 //section 3 - shop online
 .sec-3 {
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -373,6 +377,8 @@ $font: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
 
 //section 4 selected shops
 .sec-4 {
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -493,6 +499,8 @@ $font: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
 
 //section 5 collaborations
 .sec-5 {
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     padding-left: 100px;
     display: flex;
     @media screen and (min-width: 768px) {
@@ -668,6 +676,8 @@ $font: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
 
 //section 6 footer 
 .sec-6 {
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     padding: 100px;
     display: flex;
     flex-direction: column;
