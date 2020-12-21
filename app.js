@@ -1,3 +1,9 @@
+//custom height
+window.onload = () => {
+    let vh = window.innerHeight * 0.1;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+}
+
 //cursor
 const mouseCursor = document.querySelector(".cursor");
 const links = document.querySelectorAll("a");
@@ -65,4 +71,4 @@ window.onload = () => {
     hideLoadingBg();
     setTimeout(function(){
     }, 1000);
-  }
+}
